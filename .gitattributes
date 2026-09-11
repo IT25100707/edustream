@@ -1,0 +1,8 @@
+# Normalise line endings so Windows/Mac/Linux teammates don't create noisy diffs
+* text=auto eol=lf
+
+# Binary assets
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.woff2 binary

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutors — EduStream</title>
+  <meta name="description" content="Meet the EduStream tutors — practitioners and lecturers who record short, high-quality video lessons in programming, design, business, mathematics and English, and take part in the discussion around them.">
+  <meta name="theme-color" content="#120b3a">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/tutors.css">
+</head>
+<body>
+
+  <!-- Icon sprite (source of truth lives in assets/icons/icons.svg; inlined so <use> works offline) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+    <symbol id="i-play-fill" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-playlist" viewBox="0 0 24 24"><path d="M4 6h12M4 12h12M4 18h7"/><path d="M16 15v6l4-3z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-2.5v9L16 14"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8 9h8M8 12.5h5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 8-7.5 9.5-4.5-1.5-7.5-5-7.5-9.5V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 1 0 0 17h1.2a1.8 1.8 0 0 0 1.3-3l-.2-.2a1.8 1.8 0 0 1 1.3-3H17a3.5 3.5 0 0 0 3.5-3.5C20.5 6.6 16.7 3.5 12 3.5z"/><circle cx="8" cy="10" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16" cy="10" r="1"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 12h18"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.3 2.3 4.7-4.7"/></symbol>
+    <symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9.5" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15.5 6a2.8 2.8 0 0 1 0 5.5M17 14.2c2.1.5 3.5 2 3.5 4.3"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4.5 16.5a8.5 8.5 0 1 1 15 0"/><path d="M12 14l3.5-4.5"/><circle cx="12" cy="14.5" r="1.3"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4l8 4.5-8 4.5-8-4.5z"/><path d="M4 13l8 4.5 8-4.5M4 17l8 4.5 8-4.5"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 4l1.8 5.2L19 11l-5.2 1.8L12 18l-1.8-5.2L5 11l5.2-1.8z"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24"><path d="M3 9.5L12 5l9 4.5-9 4.5z"/><path d="M6.5 11.5v4.5c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.5M21 9.5v5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3L5 13.5h6L10.5 21 19 10.5h-6z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></symbol>
+    <symbol id="i-sigma" viewBox="0 0 24 24"><path d="M17 6H7l5.5 6L7 18h10"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
+  </svg>
+
+  <!-- Gradient mesh background -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-bg__orb mesh-bg__orb--1"></div>
+    <div class="mesh-bg__orb mesh-bg__orb--2"></div>
+    <div class="mesh-bg__orb mesh-bg__orb--3"></div>
+    <div class="mesh-bg__orb mesh-bg__orb--4"></div>
+    <div class="mesh-bg__noise"></div>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav glass" data-nav aria-label="Main">
+        <a class="brand" href="index.html" aria-label="EduStream home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg class="icon"><use href="#i-play-fill"></use></svg>
+          </span>
+          EduStream
+        </a>
+
+        <ul class="nav__links glass" id="primary-nav">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="courses.html">Courses</a></li>
+          <li><a class="nav__link" href="tutors.html" aria-current="page">Tutors</a></li>
+          <li><a class="nav__link" href="discussions.html">Discussions</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+        </ul>
+
+        <div class="nav__actions">
+          <a class="btn btn--primary" href="#get-started">Start learning</a>
+          <button class="nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+            <svg class="icon icon--menu"><use href="#i-menu"></use></svg>
+            <svg class="icon icon--close"><use href="#i-close"></use></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== 1. PAGE HERO ===================== -->
+    <section class="page-hero section" aria-labelledby="tutors-title">
+      <div class="container">
+        <div class="page-hero__grid">
+          <div class="page-hero__copy">
+            <span class="eyebrow reveal">Tutors</span>
+            <h1 id="tutors-title" class="reveal" style="--reveal-delay: 80ms">Taught by people who <span class="gradient-text">do this for a living.</span></h1>
+            <p class="lead reveal" style="--reveal-delay: 160ms">EduStream tutors are practitioners and lecturers in their field. They record short, high-quality lessons, arrange them into playlists, and stay in the discussion around every one.</p>
+
+            <form class="search glass reveal" role="search" data-search style="--reveal-delay: 240ms" onsubmit="return false">
+              <svg class="icon"><use href="#i-search"></use></svg>
+              <label for="tutor-search" class="visually-hidden">Search tutors</label>
+              <input class="search__input" id="tutor-search" type="search" placeholder="Search tutors — e.g. database, English, Nuwan" autocomplete="off">
+              <button class="search__clear" type="button" data-search-clear aria-label="Clear search">
+                <svg class="icon"><use href="#i-close"></use></svg>
+              </button>
+            </form>
+          </div>
+
+          <div class="fan reveal" style="--reveal-delay: 200ms" aria-hidden="true">
+            <div class="ring fan__ring float float--slow"></div>
+            <div class="fan__card fan__card--left glass">
+              <img src="assets/images/tutor-1.jpg" alt="" width="800" height="1000" loading="eager">
+              <div class="fan__card-label glass glass--dark"><strong>Nuwan Perera</strong><span>Software Engineering</span></div>
+            </div>
+            <div class="fan__card fan__card--right glass">
+              <img src="assets/images/tutor-3.jpg" alt="" width="800" height="1000" loading="eager">
+              <div class="fan__card-label glass glass--dark"><strong>Sanjeewa Wickramasinghe</strong><span>Mathematics</span></div>
+            </div>
+            <div class="fan__card fan__card--center glass">
+              <img src="assets/images/tutor-2.jpg" alt="" width="800" height="1000" loading="eager">
+              <div class="fan__card-label glass glass--dark"><strong>Dilini Jayasinghe</strong><span>Database Design</span></div>
+            </div>
+            <div class="fan__badge glass glass--strong">
+              <span class="icon-badge icon-badge--round"><svg class="icon"><use href="#i-shield"></use></svg></span>
+              <div>
+                <strong>In the discussion</strong>
+                <span>Tutors answer in moderated threads</span>
+              </div>
+            </div>
+            <div class="orb orb--blue fan__orb float"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. DIRECTORY ===================== -->
+    <section class="directory section" aria-labelledby="directory-title">
+      <div class="container">
+        <h2 id="directory-title" class="visually-hidden">All tutors</h2>
+
+        <div class="filter-bar glass reveal">
+          <div class="filter-bar__pills" role="group" aria-label="Filter by field">
+            <button class="filter-pill" type="button" data-filter="all" aria-pressed="true"><svg class="icon"><use href="#i-grid"></use></svg> All</button>
+            <button class="filter-pill" type="button" data-filter="programming" aria-pressed="false"><svg class="icon"><use href="#i-code"></use></svg> Programming</button>
+            <button class="filter-pill" type="button" data-filter="design" aria-pressed="false"><svg class="icon"><use href="#i-palette"></use></svg> Design</button>
+            <button class="filter-pill" type="button" data-filter="business" aria-pressed="false"><svg class="icon"><use href="#i-briefcase"></use></svg> Business</button>
+            <button class="filter-pill" type="button" data-filter="mathematics" aria-pressed="false"><svg class="icon"><use href="#i-sigma"></use></svg> Mathematics</button>
+            <button class="filter-pill" type="button" data-filter="english" aria-pressed="false"><svg class="icon"><use href="#i-book"></use></svg> English</button>
+          </div>
+          <p class="filter-bar__count" data-count aria-live="polite"><strong>8</strong> tutors</p>
+        </div>
+
+        <!-- Sample tutor profiles: illustrative names/portraits to be replaced with real tutor data -->
+        <ul class="directory__grid" data-catalog data-noun-one="tutor" data-noun-many="tutors">
+
+          <li class="profile glass glass--interactive reveal" data-category="programming" data-search="nuwan perera senior software engineer software engineering data structures algorithms">
+            <div class="profile__media">
+              <img src="assets/images/tutor-1.jpg" alt="Portrait of tutor Nuwan Perera" width="800" height="1000" loading="lazy">
+              <span class="tag">Programming</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Nuwan Perera</a></h3>
+              <p class="profile__role">Senior software engineer</p>
+              <p class="profile__bio">Builds large systems for a living and teaches the engineering discipline behind them — one short, practical lesson at a time.</p>
+              <div class="profile__modules">
+                <span class="chip">Software Engineering</span>
+                <span class="chip">Data Structures &amp; Algorithms</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 29 lessons · 2 courses</span>
+                <a class="profile__link" href="courses.html#programming">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="programming" data-search="dilini jayasinghe database engineer sql data modelling database design and development" style="--reveal-delay: 60ms">
+            <div class="profile__media">
+              <img src="assets/images/tutor-2.jpg" alt="Portrait of tutor Dilini Jayasinghe" width="800" height="1000" loading="lazy">
+              <span class="tag">Programming</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#featured">Dilini Jayasinghe</a></h3>
+              <p class="profile__role">Database engineer</p>
+              <p class="profile__bio">Designs and tunes production databases, and explains data modelling with the same tables you'll meet in real projects.</p>
+              <div class="profile__modules">
+                <span class="chip">Database Design &amp; Development</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 12 lessons · 1 course</span>
+                <a class="profile__link" href="courses.html#programming">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="programming" data-search="kasun fernando ai machine learning engineer artificial intelligence computer networks">
+            <div class="profile__media">
+              <img src="assets/images/tutor-5.jpg" alt="Portrait of tutor Kasun Fernando" width="800" height="1000" loading="lazy">
+              <span class="tag">Programming</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Kasun Fernando</a></h3>
+              <p class="profile__role">AI &amp; systems engineer</p>
+              <p class="profile__bio">Works on machine learning systems and the networks they run on, and keeps both explainable without the jargon.</p>
+              <div class="profile__modules">
+                <span class="chip">Artificial Intelligence</span>
+                <span class="chip">Computer Networks</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 23 lessons · 2 courses</span>
+                <a class="profile__link" href="courses.html#programming">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="programming" data-search="ishara gunawardena software engineer object oriented programming java oop" style="--reveal-delay: 60ms">
+            <div class="profile__media">
+              <img src="assets/images/tutor-6.jpg" alt="Portrait of tutor Ishara Gunawardena" width="800" height="1000" loading="lazy">
+              <span class="tag">Programming</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Ishara Gunawardena</a></h3>
+              <p class="profile__role">Software engineer · Java</p>
+              <p class="profile__bio">Teaches object-oriented design by building something small in every lesson, then refactoring it in the next.</p>
+              <div class="profile__modules">
+                <span class="chip">Object Oriented Programming</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 13 lessons · 1 course</span>
+                <a class="profile__link" href="courses.html#programming">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="design" data-search="ravindu bandara product designer ui ux design fundamentals web interface design">
+            <div class="profile__media">
+              <img src="assets/images/tutor-7.jpg" alt="Portrait of tutor Ravindu Bandara" width="800" height="1000" loading="lazy">
+              <span class="tag">Design</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Ravindu Bandara</a></h3>
+              <p class="profile__role">Product designer</p>
+              <p class="profile__bio">Designs interfaces for real products and walks through his process — research, wireframe, prototype, test — on screen.</p>
+              <div class="profile__modules">
+                <span class="chip">UI/UX Design Fundamentals</span>
+                <span class="chip">Web &amp; Interface Design</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 19 lessons · 2 courses</span>
+                <a class="profile__link" href="courses.html#design">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="business" data-search="nadeesha rathnayake business consultant business management marketing fundamentals" style="--reveal-delay: 60ms">
+            <div class="profile__media">
+              <img src="assets/images/tutor-8.jpg" alt="Portrait of tutor Nadeesha Rathnayake" width="800" height="1000" loading="lazy">
+              <span class="tag">Business</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Nadeesha Rathnayake</a></h3>
+              <p class="profile__role">Business consultant</p>
+              <p class="profile__bio">Advises small and growing businesses, and teaches management and marketing with examples drawn from that work.</p>
+              <div class="profile__modules">
+                <span class="chip">Business Management</span>
+                <span class="chip">Marketing Fundamentals</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 20 lessons · 2 courses</span>
+                <a class="profile__link" href="courses.html#business">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="mathematics" data-search="sanjeewa wickramasinghe mathematics lecturer discrete maths statistics mathematics for computing">
+            <div class="profile__media">
+              <img src="assets/images/tutor-3.jpg" alt="Portrait of tutor Sanjeewa Wickramasinghe" width="800" height="1000" loading="lazy">
+              <span class="tag">Mathematics</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Sanjeewa Wickramasinghe</a></h3>
+              <p class="profile__role">Mathematics lecturer</p>
+              <p class="profile__bio">Makes discrete maths, logic and probability click by tying every concept to the code and systems you'll use it in.</p>
+              <div class="profile__modules">
+                <span class="chip">Mathematics for Computing</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 16 lessons · 1 course</span>
+                <a class="profile__link" href="courses.html#mathematics">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="profile glass glass--interactive reveal" data-category="english" data-search="tharanga silva english lecturer academic technical writing presentations professional english" style="--reveal-delay: 60ms">
+            <div class="profile__media">
+              <img src="assets/images/tutor-4.jpg" alt="Portrait of tutor Tharanga Silva" width="800" height="1000" loading="lazy">
+              <span class="tag">English</span>
+            </div>
+            <div class="profile__body">
+              <h3><a href="#">Tharanga Silva</a></h3>
+              <p class="profile__role">English lecturer</p>
+              <p class="profile__bio">Teaches academic and technical writing, presentations and reports — the English you need to get your work understood.</p>
+              <div class="profile__modules">
+                <span class="chip">Professional English</span>
+              </div>
+              <div class="profile__footer">
+                <span><svg class="icon"><use href="#i-video"></use></svg> 10 lessons · 1 course</span>
+                <a class="profile__link" href="courses.html#english">View courses →</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="catalog__empty glass glass--subtle" data-empty hidden>
+          <span class="icon-badge icon-badge--lg icon-badge--round"><svg class="icon"><use href="#i-search"></use></svg></span>
+          <h3>No tutors match that yet</h3>
+          <p>Try a different word, or clear the filters to see every tutor.</p>
+          <button class="btn btn--glass" type="button" data-reset>Show all tutors</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. FEATURED TUTOR ===================== -->
+    <section class="featured section" id="featured" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="featured__panel glass glass--xl reveal">
+          <div class="orb orb--pink featured__orb float" aria-hidden="true"></div>
+          <div class="capsule featured__capsule float float--slow" aria-hidden="true"></div>
+
+          <div class="featured__portrait glass" aria-hidden="true">
+            <img src="assets/images/tutor-2.jpg" alt="" width="800" height="1000" loading="lazy">
+            <div class="featured__portrait-card glass glass--dark">
+              <span class="icon-badge icon-badge--round"><svg class="icon"><use href="#i-play-fill"></use></svg></span>
+              <div>
+                <strong>Normalisation: 1NF to 3NF</strong>
+                <span>Sample lesson · 9:50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="featured__copy">
+            <span class="eyebrow">Featured tutor</span>
+            <h2 id="featured-title">Dilini Jayasinghe</h2>
+            <p class="featured__role">Database engineer · Tutor of Database Design and Development</p>
+            <blockquote class="featured__quote">
+              “I keep every lesson short enough to watch between lectures, and I use the same tables and mistakes I see in real projects. If something isn't clear, ask in the thread — I read every one.”
+            </blockquote>
+            <div class="featured__teaches">
+              <h4>Teaches</h4>
+              <div class="featured__modules">
+                <div class="featured__module glass glass--subtle">
+                  <span class="icon-badge"><svg class="icon"><use href="#i-layers"></use></svg></span>
+                  <div>
+                    <strong>Database Design and Development</strong>
+                    <span>12 lessons · 8 min avg</span>
+                  </div>
+                </div>
+                <div class="featured__module glass glass--subtle">
+                  <span class="icon-badge"><svg class="icon"><use href="#i-chat"></use></svg></span>
+                  <div>
+                    <strong>Active in discussions</strong>
+                    <span>Replies in every lesson thread</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="featured__actions">
+              <a class="btn btn--primary" href="courses.html#spotlight">
+                <svg class="icon"><use href="#i-play-fill"></use></svg>
+                See her playlist
+              </a>
+              <a class="btn btn--glass" href="discussions.html">Join a discussion</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. HOW TUTORS TEACH ===================== -->
+    <section class="principles section" aria-labelledby="principles-title">
+      <div class="container">
+        <div class="section-head section-head--center reveal">
+          <span class="eyebrow">How tutors teach here</span>
+          <h2 id="principles-title">Same format, whoever's teaching.</h2>
+          <p class="lead">Every EduStream tutor follows three rules, so a course always feels familiar — whatever the subject.</p>
+        </div>
+
+        <div class="principles__row">
+          <article class="principle glass reveal" style="--lift: 0">
+            <span class="principle__num" aria-hidden="true">01</span>
+            <span class="icon-badge icon-badge--lg"><svg class="icon"><use href="#i-bolt"></use></svg></span>
+            <h3>Keep it short</h3>
+            <p>One idea per video. Lessons are cut down until only the useful part is left — no hour-long recordings.</p>
+          </article>
+          <article class="principle glass reveal" style="--lift: 1; --reveal-delay: 80ms">
+            <span class="principle__num" aria-hidden="true">02</span>
+            <span class="icon-badge icon-badge--lg"><svg class="icon"><use href="#i-playlist"></use></svg></span>
+            <h3>Put it in order</h3>
+            <p>Every lesson sits in a structured playlist, so you always know what to watch next and why.</p>
+          </article>
+          <article class="principle glass reveal" style="--lift: 0; --reveal-delay: 160ms">
+            <span class="principle__num" aria-hidden="true">03</span>
+            <span class="icon-badge icon-badge--lg"><svg class="icon"><use href="#i-shield"></use></svg></span>
+            <h3>Stay in the room</h3>
+            <p>Tutors take part in the moderated discussion under their lessons, so questions get answered by the person who taught it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. LEARN / TEACH ===================== -->
+    <section class="twin section" id="get-started" aria-labelledby="twin-title">
+      <div class="container">
+        <h2 id="twin-title" class="visually-hidden">Learn or teach on EduStream</h2>
+        <div class="twin__grid">
+          <article class="twin__panel glass glass--xl reveal">
+            <div class="twin__bg" aria-hidden="true"><img src="assets/images/get-started.jpg" alt="" width="1600" height="1067" loading="lazy"></div>
+            <div class="orb orb--blue twin__orb float" aria-hidden="true"></div>
+            <span class="eyebrow">Learn</span>
+            <h2>Start with a tutor you like.</h2>
+            <p>Pick a tutor above, open their playlist and press play. Learn at your own pace, with the discussion thread right there when you need it.</p>
+            <a class="btn btn--primary" href="courses.html">Browse courses <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+          </article>
+          <article class="twin__panel twin__panel--teach glass glass--xl reveal" style="--reveal-delay: 100ms">
+            <div class="twin__bg" aria-hidden="true"><img src="assets/images/teach.jpg" alt="" width="1600" height="1067" loading="lazy"></div>
+            <div class="orb orb--pink twin__orb float float--delay" aria-hidden="true"></div>
+            <span class="eyebrow">Teach</span>
+            <h2>Know a subject inside out?</h2>
+            <p>Expert tutors upload their own short video tutorials to EduStream and arrange them into playlists. If that's you, we'd like to hear from you.</p>
+            <a class="btn btn--glass" href="about.html">Teach on EduStream <svg class="icon"><use href="#i-arrow-up-right"></use></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid glass glass--subtle glass--xl">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="EduStream home">
+            <span class="brand__mark" aria-hidden="true"><svg class="icon"><use href="#i-play-fill"></use></svg></span>
+            EduStream
+          </a>
+          <p>An online learning platform where expert tutors share short, high-quality video tutorials in programming, design and business.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="tutors.html">Tutors</a></li>
+            <li><a href="discussions.html">Discussions</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="courses.html#programming">Programming</a></li>
+            <li><a href="courses.html#design">Design</a></li>
+            <li><a href="courses.html#business">Business</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Learning</h4>
+          <ul>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="#get-started">Get started</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> EduStream. All rights reserved.</span>
+        <span>Learn at your own pace.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/filter.js"></script>
+</body>
+</html>

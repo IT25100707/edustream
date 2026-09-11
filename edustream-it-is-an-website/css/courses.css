@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Courses page: catalogue grid · playlist spotlight
+   (page hero, search and filter bar live in shared.css)
+   ========================================================================== */
+
+/* ==========================================================================
+   3. CATALOGUE GRID
+   ========================================================================== */
+.catalog {
+  padding-top: var(--space-4);
+}
+
+.catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    opacity var(--duration-base) var(--ease-out);
+}
+
+.catalog-card[hidden] {
+  display: none;
+}
+
+.catalog-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: calc(var(--radius-lg) - var(--space-2));
+  overflow: hidden;
+}
+
+.catalog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.catalog-card:hover .catalog-card__media img {
+  transform: scale(1.05);
+}
+
+.catalog-card__media .tag {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+}
+
+.catalog-card__play {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--glass-fill-strong);
+  border: var(--border-hairline) solid var(--glass-highlight);
+  color: var(--color-text-100);
+  -webkit-backdrop-filter: blur(var(--glass-blur-soft));
+  backdrop-filter: blur(var(--glass-blur-soft));
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.catalog-card__play .icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 2px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.catalog-card:hover .catalog-card__play,
+.catalog-card:focus-within .catalog-card__play {
+  opacity: 1;
+  transform: none;
+}
+
+.catalog-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  padding: var(--space-4) var(--space-2) var(--space-2);
+}
+
+.catalog-card__body h3 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+.catalog-card__body h3 a::after {
+  /* stretch the link across the whole card */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.catalog-card__body p {
+  font-size: var(--text-sm);
+  color: var(--color-text-55);
+  line-height: var(--leading-normal);
+}
+
+.catalog-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-70);
+}
+
+.catalog-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.catalog-card__meta .icon {
+  width: 15px;
+  height: 15px;
+}
+
+.catalog-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: var(--border-hairline) solid var(--glass-border-subtle);
+}
+
+.catalog-card__tutor {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-70);
+}
+
+.catalog-card__level {
+  font-size: var(--text-xs);
+  color: var(--color-text-55);
+}
+
+.catalog__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+}
+
+.catalog__empty[hidden] {
+  display: none;
+}
+
+.catalog__empty h3 {
+  font-size: var(--text-xl);
+}
+
+.catalog__empty p {
+  color: var(--color-text-55);
+  max-width: 40ch;
+}
+
+@media (max-width: 1024px) {
+  .catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   4. PLAYLIST SPOTLIGHT — full-bleed band, lesson list overlapping the cover
+   ========================================================================== */
+.spotlight {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0.04));
+  border-top: var(--border-hairline) solid var(--glass-border-subtle);
+  border-bottom: var(--border-hairline) solid var(--glass-border-subtle);
+  overflow: hidden;
+}
+
+.spotlight__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  align-items: center;
+}
+
+.spotlight__cover {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-3);
+  margin-right: calc(-1 * var(--space-8));
+}
+
+.spotlight__cover-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: calc(var(--radius-lg) - var(--space-2));
+  overflow: hidden;
+}
+
+.spotlight__cover-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spotlight__cover-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 11, 58, 0) 40%, rgba(18, 11, 58, 0.75) 100%);
+}
+
+.spotlight__cover-media .tag {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-4);
+  z-index: 2;
+}
+
+.spotlight__cover-title {
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 2;
+}
+
+.spotlight__cover-title h3 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.spotlight__cover-title .catalog-card__tutor {
+  color: var(--color-text-85);
+}
+
+.spotlight__cover-body {
+  padding: var(--space-4) var(--space-3) var(--space-2);
+}
+
+.spotlight__cover-body p {
+  font-size: var(--text-sm);
+  color: var(--color-text-70);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.spotlight__cover-body .catalog-card__meta {
+  margin-bottom: var(--space-5);
+}
+
+.spotlight__cover-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.spotlight__list {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-6) var(--space-6) var(--space-6) calc(var(--space-8) + var(--space-6));
+}
+
+.spotlight__list-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.spotlight__list-head h4 {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-55);
+}
+
+.spotlight__list-head span {
+  font-size: var(--text-xs);
+  color: var(--color-text-55);
+}
+
+.lesson {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text-85);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.lesson + .lesson {
+  border-top: var(--border-hairline) solid var(--glass-border-subtle);
+}
+
+.lesson:hover {
+  background: var(--glass-fill);
+}
+
+.lesson__num {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: var(--border-hairline) solid var(--glass-border);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-70);
+}
+
+.lesson--current .lesson__num {
+  background: var(--gradient-cta);
+  border-color: transparent;
+  color: var(--color-text-100);
+}
+
+.lesson--current .lesson__num .icon {
+  width: 12px;
+  height: 12px;
+  margin-left: 1px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.lesson__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.lesson--current .lesson__title {
+  color: var(--color-text-100);
+  font-weight: var(--weight-semibold);
+}
+
+.lesson__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-55);
+}
+
+.lesson__meta .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.spotlight__orb {
+  width: 110px;
+  height: 110px;
+  right: -30px;
+  top: -40px;
+  z-index: 3;
+}
+
+@media (max-width: 1024px) {
+  .spotlight__grid {
+    grid-template-columns: 1fr;
+  }
+  .spotlight__cover {
+    margin-right: 0;
+    margin-inline: var(--space-4);
+  }
+  .spotlight__list {
+    margin-top: calc(-1 * var(--space-6));
+    padding: calc(var(--space-6) + var(--space-5)) var(--space-5) var(--space-5);
+  }
+}
+
+@media (max-width: 560px) {
+  .spotlight__cover {
+    margin-inline: 0;
+  }
+  .lesson {
+    grid-template-columns: 30px 1fr;
+  }
+  .lesson__meta {
+    grid-column: 2;
+  }
+  .spotlight__orb { width: 70px; height: 70px; right: -20px; }
+}

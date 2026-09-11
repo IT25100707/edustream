@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Environment secrets — never commit these
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local tooling (preview server config for the desktop app)
+.claude/
